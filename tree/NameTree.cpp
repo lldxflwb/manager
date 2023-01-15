@@ -30,8 +30,14 @@ Ecode NameTree::delete_son(PeopleRef people) {
     return delete_error;
 }
 
-PeopleInterface NameTree::get_user(PeopleRef people) {
-//    return PeopleInterface(0, 0, __cxx11::basic_string());
+std::shared_ptr<PeopleInterface> NameTree::get_user(PeopleRef people) {
+    if (people->getId() == nullptr){
+        return nullptr;
+    }
+    if (people->getUserName() == nullptr){
+        return nullptr;
+    }
+    return FindUserByNameAndID(people->getUserName()->c_str(),people->getUserName()->length(),(*people->getId()));
 }
 
 std::vector<PeopleInterface> NameTree::get_peoples(PeopleRef people) {
@@ -114,4 +120,35 @@ int NameTree::DeleteSon(PeopleRef people, const char *name, int length) {
         return true;
     }
     return false;
+}
+
+std::shared_ptr<PeopleInterface> NameTree::FindUserByNameAndID(const char *name, int length, int id) {
+    this->son_sum ++ ;
+    if (length==0){
+        // find user in peoples
+        if (peoples== nullptr){
+            return nullptr;
+        }
+        for(auto & item : *peoples){
+            if((*item->getId()) == id){
+                return std::make_shared<PeopleInterface>(item->clone());
+            }
+        }
+        return nullptr;
+    }
+    // 在这个节点放置
+    if (this->son == nullptr){
+        return nullptr;
+    }
+    if (this->son[name[0]/16]== nullptr){
+        return nullptr;
+    }
+    NameTree * tmp_root = this->son[name[0]/16];
+    if (tmp_root->son == nullptr){
+        return nullptr;
+    }
+    if (tmp_root->son[name[0]%16]== nullptr){
+        return nullptr;
+    }
+    return tmp_root->son[name[0] % 16]->FindUserByNameAndID(name + 1, length - 1,id);
 }

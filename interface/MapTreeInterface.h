@@ -12,7 +12,7 @@ class MapTreeInterface {
 public:
     virtual Ecode add_son(PeopleRef people) = 0;
     virtual Ecode delete_son(PeopleRef people) = 0;
-    virtual PeopleInterface get_user(PeopleRef people) = 0;
+    virtual std::shared_ptr<PeopleInterface> get_user(PeopleRef people) = 0;
     virtual std::vector<PeopleInterface> get_peoples(PeopleRef people) = 0 ;
     virtual std::vector<PeopleInterface> get_order(int number = 0 ,int order = 0 ) = 0 ;
 };
