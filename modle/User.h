@@ -7,6 +7,8 @@
 #include "../interface/PeopleInterface.h"
 
 class User : public PeopleInterface{
+public:
+    User(const std::string &name, time_t joinTime);
 
 };
 

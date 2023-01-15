@@ -3,3 +3,5 @@
 //
 
 #include "User.h"
+
+User::User(const std::string &name, time_t joinTime) : PeopleInterface(name, joinTime) {}
