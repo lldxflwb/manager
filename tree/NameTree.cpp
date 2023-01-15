@@ -18,7 +18,16 @@ Ecode NameTree::add_son(PeopleRef people) {
 }
 
 Ecode NameTree::delete_son(PeopleRef people) {
-    return no_join_time;
+    if (people->getId() == nullptr){
+        return Ecode::no_id;
+    }
+    if (people->getUserName() == nullptr){
+        return Ecode::no_name;
+    }
+    if (this->DeleteSon(people,people->getUserName()->c_str(),people->getUserName()->length())){
+        return success;
+    }
+    return delete_error;
 }
 
 PeopleInterface NameTree::get_user(PeopleRef people) {

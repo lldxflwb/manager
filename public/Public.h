@@ -11,5 +11,6 @@ enum Ecode{
     no_id = 1,
     no_name = 2 ,
     no_join_time = 3,
-    insert_error = 4
+    insert_error = 4,
+    delete_error = 5
 };
