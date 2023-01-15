@@ -8,8 +8,9 @@
 #include <string>
 #include <ostream>
 #include <memory>
+typedef long int IDTYPE;
 class PeopleInterface {
-    std::shared_ptr<int> id;
+    std::shared_ptr<IDTYPE> id;
     std::shared_ptr<time_t> join_time;
     std::shared_ptr<std::string> user_name;
 public:
@@ -21,9 +22,9 @@ public:
     PeopleInterface(int id , std::string name , time_t join_time);
     static int get_next_id();
 
-    const std::shared_ptr<int> &getId() const;
+    const std::shared_ptr<IDTYPE> &getId() const;
 
-    void setId(int id);
+    void setId(IDTYPE id);
 
     const std::shared_ptr<time_t> &getJoinTime() const;
 

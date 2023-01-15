@@ -12,27 +12,27 @@ PeopleInterface::PeopleInterface() {
 }
 
 PeopleInterface::PeopleInterface(int id , std::string name , time_t join_time) {
-    this->id = std::make_shared<int>(id);
+    this->id = std::make_shared<IDTYPE>(id);
     this->user_name = std::make_shared<std::string>(name);
     this->join_time = std::make_shared<time_t>(join_time);
 }
 
 int PeopleInterface::get_next_id() {
-    static int max_id = 1 ;
+    static IDTYPE max_id = 1 ;
     return max_id ++;
 }
 
 PeopleInterface::PeopleInterface(std::string name, time_t join_time) {
-    this->id = std::make_shared<int>(get_next_id());
+    this->id = std::make_shared<IDTYPE>(get_next_id());
     this->user_name = std::make_shared<std::string>(name);
     this->join_time = std::make_shared<time_t>(join_time);
 }
 
-const std::shared_ptr<int> &PeopleInterface::getId() const {
+const std::shared_ptr<IDTYPE> &PeopleInterface::getId() const {
     return id;
 }
 
-void PeopleInterface::setId(int id) {
+void PeopleInterface::setId(IDTYPE id) {
     (*PeopleInterface::id) = id;
 }
 
