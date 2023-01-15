@@ -151,3 +151,36 @@ std::shared_ptr<PeopleInterface> NameTree::FindUserByNameAndID(const char *name,
     }
     return tmp_root->son[name[0] % 16]->FindUserByNameAndID(name + 1, length - 1,id);
 }
+
+std::shared_ptr<std::vector<PeopleInterface>> NameTree::FindUserByName(const char *name, int length) {
+    if (length==0){
+        // find user in peoples
+        if (peoples== nullptr){
+            return nullptr;
+        }
+        std::shared_ptr<std::vector<PeopleInterface>> result = std::make_shared<std::vector<PeopleInterface>>();
+        for(auto & item : *peoples){
+            result->push_back(item->clone());
+        }
+        return result;
+    }
+    // 在这个节点放置
+    if (this->son == nullptr){
+        return nullptr;
+    }
+    if (this->son[name[0]/16]== nullptr){
+        return nullptr;
+    }
+    NameTree * tmp_root = this->son[name[0]/16];
+    if (tmp_root->son == nullptr){
+        return nullptr;
+    }
+    if (tmp_root->son[name[0]%16]== nullptr){
+        return nullptr;
+    }
+    return tmp_root->son[name[0] % 16]->FindUserByName(name + 1, length - 1);
+}
+
+std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_users(std::string name) {
+    return FindUserByName(name.c_str(),name.length());
+}
