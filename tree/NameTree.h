@@ -24,9 +24,9 @@ public:
 
     std::shared_ptr<std::vector<PeopleInterface>> get_users(std::string name);
 
-    std::vector<PeopleInterface> get_peoples(PeopleRef people) override;
+    std::shared_ptr<std::vector<PeopleInterface>> get_peoples(PeopleRef people) override;
 
-    std::vector<PeopleInterface> get_order(int number, int order) override;
+    std::shared_ptr<std::vector<PeopleInterface>> get_order(int number, int order) override;
 };
 
 

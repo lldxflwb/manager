@@ -40,14 +40,14 @@ std::shared_ptr<PeopleInterface> NameTree::get_user(PeopleRef people) {
     return FindUserByNameAndID(people->getUserName()->c_str(),people->getUserName()->length(),(*people->getId()));
 }
 
-std::vector<PeopleInterface> NameTree::get_peoples(PeopleRef people) {
-    return *FindUserByName(people->getUserName()->c_str(),people->getUserName()->length());
+std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_peoples(PeopleRef people) {
+    return FindUserByName(people->getUserName()->c_str(),people->getUserName()->length());
 }
 
-std::vector<PeopleInterface> NameTree::get_order(int number, int order) {
+std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_order(int number, int order) {
     std::shared_ptr<std::vector<PeopleInterface>> result = std::make_shared<std::vector<PeopleInterface>>();
     this->OrderInfo(result,order);
-    return *result;
+    return result;
 }
 
 int NameTree::AddSon(PeopleRef people, const char *name, int length) {
