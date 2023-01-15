@@ -41,7 +41,7 @@ std::shared_ptr<PeopleInterface> NameTree::get_user(PeopleRef people) {
 }
 
 std::vector<PeopleInterface> NameTree::get_peoples(PeopleRef people) {
-    return std::vector<PeopleInterface>();
+    return *FindUserByName(people->getUserName()->c_str(),people->getUserName()->length());
 }
 
 std::vector<PeopleInterface> NameTree::get_order(int number, int order) {
