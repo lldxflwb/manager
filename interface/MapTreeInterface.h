@@ -14,7 +14,7 @@ public:
     virtual Ecode delete_son(PeopleRef people) = 0;
     virtual std::shared_ptr<PeopleInterface> get_user(PeopleRef people) = 0;
     virtual std::shared_ptr<std::vector<PeopleInterface>> get_peoples(PeopleRef people) = 0 ;
-    virtual std::shared_ptr<std::vector<PeopleInterface>> get_order(int number = 0 , int order = 0 ) = 0 ;
+    virtual std::shared_ptr<std::vector<PeopleInterface>> get_order(int order = 0) = 0 ;
 };
 
 
