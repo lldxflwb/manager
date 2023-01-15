@@ -4,10 +4,25 @@
 
 #ifndef MANAGER_NUMBERTREE_H
 #define MANAGER_NUMBERTREE_H
+#include "../modle/User.h"
+#include "../interface/MapTreeInterface.h"
+#define NUMBER_TREE_MAX_NUMBER 5;
 
+class NumberTree : public MapTreeInterface{
+    NumberTree ** son;
+    User * user;
+    int son_sum;
 
-class NumberTree {
+public:
+    Ecode add_son(PeopleRef people) override;
 
+    Ecode delete_son(PeopleRef people) override;
+
+    std::shared_ptr<PeopleInterface> get_user(PeopleRef people) override;
+
+    std::shared_ptr<std::vector<PeopleInterface>> get_peoples(PeopleRef people) override;
+
+    std::shared_ptr<std::vector<PeopleInterface>> get_order(int order) override;
 };
 
 
