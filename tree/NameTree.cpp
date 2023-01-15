@@ -200,7 +200,7 @@ void NameTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result, i
             for( int i = 0 ; i < 16 ; i ++ ) {
                 auto item = son[i];
                 if ( item!= nullptr ) {
-                    item->OrderInfo(result);
+                    item->OrderInfo(result,method);
                 }
             }
             if (peoples != nullptr) {
@@ -221,7 +221,7 @@ void NameTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result, i
             for( int i = 15 ; i >= 0 ; i -- ) {
                 auto item = son[i];
                 if ( item!= nullptr ) {
-                    item->OrderInfo(result);
+                    item->OrderInfo(result,method);
                 }
             }
         }
