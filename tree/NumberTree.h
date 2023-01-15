@@ -6,7 +6,7 @@
 #define MANAGER_NUMBERTREE_H
 #include "../modle/User.h"
 #include "../interface/MapTreeInterface.h"
-#define NUMBER_TREE_MAX_NUMBER 5;
+#define NUMBER_TREE_MAX_NUMBER 5l
 
 class NumberTree : public MapTreeInterface{
     NumberTree ** son;
