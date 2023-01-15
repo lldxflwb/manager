@@ -53,24 +53,28 @@ std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_order(int order) {
 int NameTree::AddSon(PeopleRef people, const char *name, int length) {
     this->son_sum ++ ;
     if (length==0){
+        if (this->peoples == nullptr){
+            this->peoples = new std::vector<PeopleRef>();
+        }
         this->peoples->push_back(people);
         return true;
     }
+    int value = name[0] + 128;
     // 在这个节点放置
     if (this->son == nullptr){
         this->son = new NameTree*[16];
     }
-    if (this->son[name[0]/16]== nullptr){
-        this->son[name[0]/16] = new NameTree;
+    if (this->son[value/16]== nullptr){
+        this->son[value/16] = new NameTree;
     }
-    NameTree * tmp_root = this->son[name[0]/16];
+    NameTree * tmp_root = this->son[value/16];
     if (tmp_root->son == nullptr){
         tmp_root->son = new NameTree * [16];
     }
-    if (tmp_root->son[name[0]%16]== nullptr){
-        tmp_root->son[name[0]%16] = new NameTree;
+    if (tmp_root->son[value%16]== nullptr){
+        tmp_root->son[value%16] = new NameTree;
     }
-    return tmp_root->son[name[0] % 16]->AddSon(people, name + 1, length - 1);
+    return tmp_root->son[value % 16]->AddSon(people, name + 1, length - 1);
 }
 
 int NameTree::DeleteSon(PeopleRef people, const char *name, int length) {
@@ -98,21 +102,22 @@ int NameTree::DeleteSon(PeopleRef people, const char *name, int length) {
         }
         return false;
     }
+    int value = name[0] + 128;
     // 需要往下走
     if (this->son == nullptr){
         // 子节点没有内容
         return false;
     }
-    if (this->son[name[0]/16]== nullptr){
+    if (this->son[value/16]== nullptr){
         // 字节的对应部分没有内容
         return false;
     }
-    NameTree * tmp_root = this->son[name[0]/16];
+    NameTree * tmp_root = this->son[value/16];
     if (tmp_root->son == nullptr){
         // 子树没有内容
         return false;
     }
-    if (tmp_root->son[name[0]%16]== nullptr){
+    if (tmp_root->son[value%16]== nullptr){
         // 子树的子树没有内容
         return false;
     }
@@ -137,21 +142,22 @@ std::shared_ptr<PeopleInterface> NameTree::FindUserByNameAndID(const char *name,
         }
         return nullptr;
     }
+    int value = name[0] + 128;
     // 在这个节点放置
     if (this->son == nullptr){
         return nullptr;
     }
-    if (this->son[name[0]/16]== nullptr){
+    if (this->son[value/16]== nullptr){
         return nullptr;
     }
-    NameTree * tmp_root = this->son[name[0]/16];
+    NameTree * tmp_root = this->son[value/16];
     if (tmp_root->son == nullptr){
         return nullptr;
     }
-    if (tmp_root->son[name[0]%16]== nullptr){
+    if (tmp_root->son[value%16]== nullptr){
         return nullptr;
     }
-    return tmp_root->son[name[0] % 16]->FindUserByNameAndID(name + 1, length - 1,id);
+    return tmp_root->son[value % 16]->FindUserByNameAndID(name + 1, length - 1,id);
 }
 
 std::shared_ptr<std::vector<PeopleInterface>> NameTree::FindUserByName(const char *name, int length) {
@@ -166,21 +172,22 @@ std::shared_ptr<std::vector<PeopleInterface>> NameTree::FindUserByName(const cha
         }
         return result;
     }
+    int value = name[0] + 128;
     // 在这个节点放置
     if (this->son == nullptr){
         return nullptr;
     }
-    if (this->son[name[0]/16]== nullptr){
+    if (this->son[value/16]== nullptr){
         return nullptr;
     }
-    NameTree * tmp_root = this->son[name[0]/16];
+    NameTree * tmp_root = this->son[value/16];
     if (tmp_root->son == nullptr){
         return nullptr;
     }
-    if (tmp_root->son[name[0]%16]== nullptr){
+    if (tmp_root->son[value%16]== nullptr){
         return nullptr;
     }
-    return tmp_root->son[name[0] % 16]->FindUserByName(name + 1, length - 1);
+    return tmp_root->son[value % 16]->FindUserByName(name + 1, length - 1);
 }
 
 std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_users(std::string name) {
@@ -188,29 +195,32 @@ std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_users(std::string na
 }
 
 void NameTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result, int method) {
-    if (son != NULL) {
+    if (son != nullptr) {
         if(method == 0 ){
             for( int i = 0 ; i < 16 ; i ++ ) {
                 auto item = son[i];
-                if ( item!= NULL ) {
+                if ( item!= nullptr ) {
                     item->OrderInfo(result);
                 }
             }
-            if (peoples != NULL) {
+            if (peoples != nullptr) {
                 for ( auto & item : *peoples) {
+                    if (item == nullptr){
+                        continue;
+                    }
                     result->push_back(item->clone());
                 }
             }
         }
         else{
-            if (peoples != NULL) {
+            if (peoples != nullptr) {
                 for ( auto & item : *peoples) {
                     result->push_back(item->clone());
                 }
             }
             for( int i = 15 ; i >= 0 ; i -- ) {
                 auto item = son[i];
-                if ( item!= NULL ) {
+                if ( item!= nullptr ) {
                     item->OrderInfo(result);
                 }
             }
@@ -218,7 +228,7 @@ void NameTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result, i
 
     }
     else {
-        if (peoples != NULL) {
+        if (peoples != nullptr) {
             for ( auto & item : *peoples) {
                 result->push_back(item->clone());
             }
