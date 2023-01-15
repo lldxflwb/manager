@@ -12,7 +12,11 @@ class NumberTree : public MapTreeInterface{
     NumberTree ** son;
     PeopleRef user;
     int son_sum;
-
+    int AddSon(PeopleRef people, IDTYPE id);
+//    int DeleteSon(PeopleRef people , const char *name , int length);
+//    std::shared_ptr<PeopleInterface> FindUserByNameAndID(const char *name , int length , int id);
+//    std::shared_ptr<std::vector<PeopleInterface>> FindUserByName(const char *name, int length );
+//    void OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result , int method = 0 );
 public:
     Ecode add_son(PeopleRef people) override;
 
