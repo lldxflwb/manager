@@ -5,3 +5,8 @@
 #include "User.h"
 
 User::User(const std::string &name, time_t joinTime) : PeopleInterface(name, joinTime) {}
+
+std::ostream &operator<<(std::ostream &os, const User &user) {
+    os << static_cast<const PeopleInterface &>(user);
+    return os;
+}
