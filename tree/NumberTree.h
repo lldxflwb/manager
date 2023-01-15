@@ -10,7 +10,7 @@
 
 class NumberTree : public MapTreeInterface{
     NumberTree ** son;
-    User * user;
+    PeopleRef user;
     int son_sum;
 
 public:
