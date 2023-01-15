@@ -3,6 +3,7 @@
 //
 
 #include "PeopleInterface.h"
+#include <iostream>
 
 PeopleInterface::PeopleInterface() {
     id= nullptr;
@@ -54,4 +55,10 @@ void PeopleInterface::setUserName(std::string userName) {
 PeopleInterface PeopleInterface::clone() {
     PeopleInterface c((*this->id),*(this->user_name),*(this->join_time));
     return c;
+}
+
+std::ostream &operator<<(std::ostream &os, const PeopleInterface &anInterface) {
+    os << "id: " << anInterface.id << " join_time: " << anInterface.join_time << " user_name: "
+       << anInterface.user_name;
+    return os;
 }

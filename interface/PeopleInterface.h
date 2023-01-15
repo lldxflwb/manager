@@ -33,6 +33,8 @@ public:
 
     void setUserName(std::string userName);
 
+    friend std::ostream &operator<<(std::ostream &os, const PeopleInterface &anInterface);
+
     PeopleInterface clone();
 };
 typedef PeopleInterface * PeopleRef ;
