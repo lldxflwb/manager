@@ -30,7 +30,9 @@ std::shared_ptr<std::vector<PeopleInterface>> NumberTree::get_peoples(PeopleRef 
 }
 
 std::shared_ptr<std::vector<PeopleInterface>> NumberTree::get_order(int order) {
-    return std::shared_ptr<std::vector<PeopleInterface>>();
+    std::shared_ptr<std::vector<PeopleInterface>> result = std::make_shared<std::vector<PeopleInterface>>();
+    this->OrderInfo(result,order);
+    return result;
 }
 
 int NumberTree::AddSon(PeopleRef people, IDTYPE id) {
@@ -83,4 +85,37 @@ int NumberTree::DeleteSon(PeopleRef people, IDTYPE id) {
         return true;
     }
     return false;
+}
+
+void NumberTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result, int method) {
+    if (son != nullptr) {
+        if(method == 0 ){
+            for( int i = 0 ; i < NUMBER_TREE_MAX_NUMBER ; i ++ ) {
+                auto item = son[i];
+                if ( item!= nullptr ) {
+                    item->OrderInfo(result,method);
+                }
+            }
+            if (user != nullptr) {
+                result->push_back(user->clone());
+            }
+        }
+        else{
+            if (user != nullptr) {
+                result->push_back(user->clone());
+            }
+            for( int i = NUMBER_TREE_MAX_NUMBER ; i >= 0 ; i -- ) {
+                auto item = son[i];
+                if ( item!= nullptr ) {
+                    item->OrderInfo(result,method);
+                }
+            }
+        }
+
+    }
+    else {
+        if (user != nullptr) {
+            result->push_back(user->clone());
+        }
+    }
 }

@@ -16,7 +16,7 @@ class NumberTree : public MapTreeInterface{
     int DeleteSon(PeopleRef people , IDTYPE id);
 //    std::shared_ptr<PeopleInterface> FindUserByNameAndID(const char *name , int length , int id);
 //    std::shared_ptr<std::vector<PeopleInterface>> FindUserByName(const char *name, int length );
-//    void OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result , int method = 0 );
+    void OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result , int method = 0 );
 public:
     Ecode add_son(PeopleRef people) override;
 
