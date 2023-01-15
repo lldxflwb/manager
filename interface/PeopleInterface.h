@@ -32,6 +32,8 @@ public:
     const std::shared_ptr<std::string> &getUserName() const;
 
     void setUserName(std::string userName);
+
+    PeopleInterface clone();
 };
 typedef PeopleInterface * PeopleRef ;
 

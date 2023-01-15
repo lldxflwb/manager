@@ -50,3 +50,8 @@ const std::shared_ptr<std::string> &PeopleInterface::getUserName() const {
 void PeopleInterface::setUserName(std::string userName) {
     *user_name = userName;
 }
+
+PeopleInterface PeopleInterface::clone() {
+    PeopleInterface c((*this->id),*(this->user_name),*(this->join_time));
+    return c;
+}
