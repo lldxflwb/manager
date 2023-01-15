@@ -4,10 +4,21 @@
 
 #ifndef MANAGER_NAMETREETEST_H
 #define MANAGER_NAMETREETEST_H
-
-
+#include "TestAction.h"
+#include "../tree/NameTree.h"
 class NameTreeTest {
+    std::shared_ptr<Manager> manager ;
+    std::shared_ptr<NameTree> tree ;
 
+public:
+    NameTreeTest() {
+        manager = TestAction::MakeManager(100000);
+        tree = std::make_shared<NameTree>();
+    }
+
+    void test();
+    void insert_test();
+    void query_test();
 };
 
 
