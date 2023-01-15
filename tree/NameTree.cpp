@@ -123,7 +123,6 @@ int NameTree::DeleteSon(PeopleRef people, const char *name, int length) {
 }
 
 std::shared_ptr<PeopleInterface> NameTree::FindUserByNameAndID(const char *name, int length, int id) {
-    this->son_sum ++ ;
     if (length==0){
         // find user in peoples
         if (peoples== nullptr){
