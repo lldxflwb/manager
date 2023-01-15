@@ -22,11 +22,23 @@ Ecode NumberTree::delete_son(PeopleRef people) {
 }
 
 std::shared_ptr<PeopleInterface> NumberTree::get_user(PeopleRef people) {
-    return std::shared_ptr<PeopleInterface>();
+    if (people->getId() == nullptr){
+        return nullptr;
+    }
+    return FindUserByID(*people->getId());
 }
 
 std::shared_ptr<std::vector<PeopleInterface>> NumberTree::get_peoples(PeopleRef people) {
-    return std::shared_ptr<std::vector<PeopleInterface>>();
+    if (people->getId() == nullptr){
+        return nullptr;
+    }
+    auto result = FindUserByID(*people->getId());
+    if (result == nullptr){
+        return nullptr;
+    }
+    std::shared_ptr<std::vector<PeopleInterface>> vec = std::make_shared<std::vector<PeopleInterface>>();
+    vec->push_back(*result);
+    return vec;
 }
 
 std::shared_ptr<std::vector<PeopleInterface>> NumberTree::get_order(int order) {
@@ -118,4 +130,21 @@ void NumberTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result,
             result->push_back(user->clone());
         }
     }
+}
+
+std::shared_ptr<PeopleInterface> NumberTree::FindUserByID(IDTYPE id) {
+    if ( id == 0 ) {
+        if ( user != nullptr ) {
+            return nullptr;
+        }
+        return std::make_shared<PeopleInterface>(user->clone());
+    }
+    if ( son == nullptr ) {
+        return nullptr;
+    }
+    int index = id % NUMBER_TREE_MAX_NUMBER;
+    if ( son[index] == nullptr ) {
+        return nullptr;
+    }
+    return son[index]->FindUserByID(id/NUMBER_TREE_MAX_NUMBER);
 }
