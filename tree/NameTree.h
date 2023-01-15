@@ -16,6 +16,8 @@ class NameTree : MapTreeInterface{
     std::shared_ptr<std::vector<PeopleInterface>> FindUserByName(const char *name, int length );
     void OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result , int method = 0 );
 public:
+    NameTree();
+
     Ecode add_son(PeopleRef people) override;
 
     Ecode delete_son(PeopleRef people) override;

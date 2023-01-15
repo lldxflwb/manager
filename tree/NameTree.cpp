@@ -225,3 +225,9 @@ void NameTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result, i
         }
     }
 }
+
+NameTree::NameTree() {
+    this->peoples = nullptr;
+    this->son = nullptr;
+    this->son_sum = 0 ;
+}
