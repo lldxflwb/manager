@@ -45,7 +45,9 @@ std::vector<PeopleInterface> NameTree::get_peoples(PeopleRef people) {
 }
 
 std::vector<PeopleInterface> NameTree::get_order(int number, int order) {
-    return std::vector<PeopleInterface>();
+    std::shared_ptr<std::vector<PeopleInterface>> result = std::make_shared<std::vector<PeopleInterface>>();
+    this->OrderInfo(result,order);
+    return *result;
 }
 
 int NameTree::AddSon(PeopleRef people, const char *name, int length) {
@@ -183,4 +185,43 @@ std::shared_ptr<std::vector<PeopleInterface>> NameTree::FindUserByName(const cha
 
 std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_users(std::string name) {
     return FindUserByName(name.c_str(),name.length());
+}
+
+void NameTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result, int method) {
+    if (son != NULL) {
+        if(method == 0 ){
+            for( int i = 0 ; i < 16 ; i ++ ) {
+                auto item = son[i];
+                if ( item!= NULL ) {
+                    item->OrderInfo(result);
+                }
+            }
+            if (peoples != NULL) {
+                for ( auto & item : *peoples) {
+                    result->push_back(item->clone());
+                }
+            }
+        }
+        else{
+            if (peoples != NULL) {
+                for ( auto & item : *peoples) {
+                    result->push_back(item->clone());
+                }
+            }
+            for( int i = 15 ; i >= 0 ; i -- ) {
+                auto item = son[i];
+                if ( item!= NULL ) {
+                    item->OrderInfo(result);
+                }
+            }
+        }
+
+    }
+    else {
+        if (peoples != NULL) {
+            for ( auto & item : *peoples) {
+                result->push_back(item->clone());
+            }
+        }
+    }
 }
