@@ -5,6 +5,13 @@
 #ifndef MANAGER_TESTACTION_H
 #define MANAGER_TESTACTION_H
 #include "../modle/Manager.h"
+#include <iostream>
+#include <chrono>
+#define START_TIMER auto start = std::chrono::high_resolution_clock::now();
+
+#define STOP_TIMER  auto stop = std::chrono::high_resolution_clock::now(); \
+                    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start); \
+                    std::cout << "Time taken by function: "<< duration.count() << " milliseconds" << std::endl;
 
 class TestAction {
 public:
