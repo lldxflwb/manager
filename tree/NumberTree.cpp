@@ -5,7 +5,10 @@
 #include "NumberTree.h"
 
 Ecode NumberTree::add_son(PeopleRef people) {
-    return insert_error;
+    if (AddSon(people,*people->getId())){
+        return success;
+    }
+    return Ecode::insert_error;
 }
 
 Ecode NumberTree::delete_son(PeopleRef people) {
