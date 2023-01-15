@@ -23,9 +23,9 @@ void NameTreeTest::insert_test() {
 void NameTreeTest::query_test() {
     START_TIMER
     auto vec = tree->get_order(0);
-    for (auto & item : *vec) {
-        std::cout << (*item.getUserName()) << std::endl;
-    }
+//    for (auto & item : *vec) {
+//        std::cout << (*item.getUserName()) << std::endl;
+//    }
     STOP_TIMER
 }
 
