@@ -3,3 +3,7 @@
 //
 
 #include "Manager.h"
+
+Manager::Manager() {
+    user = std::make_shared<std::vector<User>>();
+}

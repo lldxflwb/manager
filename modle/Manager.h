@@ -9,7 +9,9 @@
 #include <vector>
 class Manager {
 public:
-    std::shared_ptr<User> user;
+    std::shared_ptr<std::vector<User>> user;
+
+    Manager();
 };
 
 
