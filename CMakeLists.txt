@@ -3,4 +3,11 @@ project(manager)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(manager main.cpp interface/MapTreeInterface.cpp interface/PeopleInterface.cpp modle/User.cpp tree/NameTree.cpp)
+add_executable(manager main.cpp
+        interface/MapTreeInterface.cpp
+        interface/PeopleInterface.cpp
+        modle/User.cpp
+        tree/NameTree.cpp
+        modle/Manager.cpp
+        test/NameTreeTest.cpp
+        test/TestAction.cpp)
