@@ -7,7 +7,8 @@ add_executable(manager main.cpp
         interface/MapTreeInterface.cpp
         interface/PeopleInterface.cpp
         modle/User.cpp
-        tree/NameTree.cpp
         modle/Manager.cpp
+        tree/NameTree.cpp
+        tree/NumberTree.cpp
         test/NameTreeTest.cpp
         test/TestAction.cpp)
