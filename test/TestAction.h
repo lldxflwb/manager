@@ -10,6 +10,8 @@ class TestAction {
 public:
     static std::shared_ptr<Manager> MakeManager(int number = 1000);
 
+    static int RandomRange(int start_no , int end_no);
+
     static std::string RandomName();
 
     static time_t RandomJoinTime();
