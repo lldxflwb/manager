@@ -3,9 +3,26 @@
 //
 
 #include "NumberTree.h"
-
+#include <stack>
 Ecode NumberTree::add_son(PeopleRef people) {
-    if (AddSon(people,*people->getId())){
+    IDTYPE id = *people->getId();
+    std::queue<int> q;
+    int deep = GetMaxDeep();
+    int number_deep = GetMaxDeep(id);
+    deep-=number_deep;
+    while (deep--){
+        q.push(0);
+    }
+    std::stack<int> st;
+    while(id){
+        st.push(id%NUMBER_TREE_MAX_NUMBER);
+        id/=NUMBER_TREE_MAX_NUMBER;
+    }
+    while(!st.empty()){
+        q.push(st.top());
+        st.pop();
+    }
+    if (AddSon(people,q)){
         return success;
     }
     return Ecode::insert_error;
@@ -47,8 +64,8 @@ std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NumberTree::get_o
     return result;
 }
 
-int NumberTree::AddSon(PeopleRef people, IDTYPE id) {
-    if ( id == 0 ) {
+int NumberTree::AddSon(PeopleRef people, std::queue<int> &st) {
+    if (st.empty() ) {
         if ( user != nullptr ) {
             return false;
         }
@@ -61,11 +78,12 @@ int NumberTree::AddSon(PeopleRef people, IDTYPE id) {
             son[i] = nullptr;
         }
     }
-    int index = id % NUMBER_TREE_MAX_NUMBER;
+    int index = st.front();
+    st.pop();
     if ( son[index] == nullptr ) {
         son[index] = new NumberTree();
     }
-    bool flag_result = son[index]->AddSon(user,id/NUMBER_TREE_MAX_NUMBER);
+    bool flag_result = son[index]->AddSon(people, st );
     if ( flag_result ){
         son_sum ++ ;
         return true;
@@ -105,27 +123,29 @@ int NumberTree::DeleteSon(PeopleRef people, IDTYPE id) {
 void NumberTree::OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result, int method) {
     if (son != nullptr) {
         if(method == 0 ){
+            if (user != nullptr) {
+                result->push_back(user->clone());
+            }
             for( int i = 0 ; i < NUMBER_TREE_MAX_NUMBER ; i ++ ) {
                 auto item = son[i];
                 if ( item!= nullptr ) {
                     item->OrderInfo(result,method);
                 }
             }
-            if (user != nullptr) {
-                result->push_back(user->clone());
-            }
+
         }
         else{
-            if (user != nullptr) {
-                result->push_back(user->clone());
-            }
-            for( int i = NUMBER_TREE_MAX_NUMBER ; i >= 0 ; i -- ) {
+            for( int i = NUMBER_TREE_MAX_NUMBER - 1 ; i >= 0 ; i -- ) {
                 auto item = son[i];
                 if ( item!= nullptr ) {
                     item->OrderInfo(result,method);
                 }
             }
+            if (user != nullptr) {
+                result->push_back(user->clone());
+            }
         }
+
 
     }
     else {

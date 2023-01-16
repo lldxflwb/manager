@@ -57,7 +57,7 @@ std::shared_ptr<PeopleInterface> PeopleInterface::clone() {
 }
 
 std::ostream &operator<<(std::ostream &os, const PeopleInterface &anInterface) {
-    os << "id: " << anInterface.id << " join_time: " << anInterface.join_time << " user_name: "
-       << anInterface.user_name;
+    os << "id: " << *anInterface.id << " join_time: " << *anInterface.join_time << " user_name: "
+       << *anInterface.user_name;
     return os;
 }
