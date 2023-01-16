@@ -57,6 +57,9 @@ int NumberTree::AddSon(PeopleRef people, IDTYPE id) {
     }
     if ( son == nullptr ) {
         son = new NumberTree*[NUMBER_TREE_MAX_NUMBER];
+        for (int i = 0; i < NUMBER_TREE_MAX_NUMBER; ++i) {
+            son[i] = nullptr;
+        }
     }
     int index = id % NUMBER_TREE_MAX_NUMBER;
     if ( son[index] == nullptr ) {
