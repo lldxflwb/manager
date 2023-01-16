@@ -146,7 +146,7 @@ void NumberTree::OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInt
 
 std::shared_ptr<PeopleInterface> NumberTree::FindUserByID(std::queue<int> id) {
     if ( id.empty() ) {
-        if ( user != nullptr ) {
+        if ( user == nullptr ) {
             return nullptr;
         }
         return user->clone();
