@@ -14,7 +14,10 @@ void NumberTreeTest::insert_test() {
     std::cout << "开始插入，插入用户数量为：" << manager->user->size() << std::endl;
     START_TIMER
     for (auto & item : *((*manager).user)) {
-        tree->add_son(&item);
+        if(tree->add_son(&item)!=Ecode::success){
+            std::cerr<< " 插入错误 ， 用户 ： " << item << std::endl;
+            return ;
+        }
     }
     STOP_TIMER
     std::cout << std::endl;
