@@ -14,6 +14,9 @@ class PeopleInterface {
     std::shared_ptr<time_t> join_time;
     std::shared_ptr<std::string> user_name;
 public:
+    virtual ~PeopleInterface();
+
+public:
     // use for save ， the id will bigger
     PeopleInterface(std::string name , time_t join_time);
 

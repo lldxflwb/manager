@@ -7,3 +7,7 @@
 TestManager::TestManager() {
     user = std::make_shared<std::vector<User>>();
 }
+
+TestManager::~TestManager() {
+    user.reset();
+}

@@ -61,3 +61,18 @@ std::ostream &operator<<(std::ostream &os, const PeopleInterface &anInterface) {
        << *anInterface.user_name;
     return os;
 }
+
+PeopleInterface::~PeopleInterface() {
+    if (this->id){
+        this->id.reset();
+        this->id = nullptr;
+    }
+    if (this->join_time){
+        this->join_time.reset();
+        this->join_time = nullptr;
+    }
+    if (this->user_name){
+        this->user_name.reset();
+        this->user_name = nullptr;
+    }
+}

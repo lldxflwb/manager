@@ -11,6 +11,8 @@ class TestManager {
 public:
     std::shared_ptr<std::vector<User>> user;
     TestManager();
+
+    virtual ~TestManager();
 };
 
 

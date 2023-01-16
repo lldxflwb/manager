@@ -40,6 +40,10 @@ public:
 
     Ecode delete_son(PeopleRef people) override;
 
+    virtual ~NumberTree();
+
+    NumberTree();
+
     std::shared_ptr<PeopleInterface> get_user(PeopleRef people) override;
 
     std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> get_peoples(PeopleRef people) override;

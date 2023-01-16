@@ -84,6 +84,7 @@ int NumberTree::DeleteSon(PeopleRef people, std::queue<int> id) {
         if ( user !=nullptr ) {
             if ( (*user->getId()) == (*people->getId())){
                 user = nullptr;
+                this->son_sum -- ;
                 return true;
             }
             return false;
@@ -104,6 +105,10 @@ int NumberTree::DeleteSon(PeopleRef people, std::queue<int> id) {
     bool flag_result = son[index]->DeleteSon(people,id);
     if ( flag_result ){
         son_sum--;
+        if( son[index]->son_sum == 0 ){
+            delete son[index];
+            son[index] = nullptr;
+        }
         return true;
     }
     return false;
@@ -180,4 +185,25 @@ std::queue<int> NumberTree::GetIDs(IDTYPE id) {
         st.pop();
     }
     return std::move(q);
+}
+
+NumberTree::NumberTree() {
+    this->son = nullptr;
+    this->user = nullptr;
+    this->son_sum = 0;
+}
+
+NumberTree::~NumberTree() {
+    if ( this->son != nullptr ){
+        for (int i = 0; i < NUMBER_TREE_MAX_NUMBER; ++i) {
+            if (this->son[i] != nullptr ){
+                delete this->son[i] ;
+            }
+        }
+        delete son;
+    }
+    if (this->user != nullptr){
+        this->user = nullptr;
+    }
+    son_sum = 0;
 }

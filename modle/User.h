@@ -14,6 +14,8 @@ public:
     virtual std::shared_ptr<PeopleInterface> clone() override;
     friend std::ostream &operator<<(std::ostream &os, const User &user);
     User(PeopleInterface && p);
+
+    virtual ~User();
 };
 
 

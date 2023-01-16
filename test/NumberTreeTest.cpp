@@ -22,9 +22,10 @@ void NumberTreeTest::insert_test() {
     STOP_TIMER
     std::cout << std::endl;
 }
-
+#include "thread"
 void NumberTreeTest::query_test() {
     {
+        std::this_thread::sleep_for(std::chrono::seconds (5));
         std::cout << "测试正向获取用户列表" <<std::endl;
         START_TIMER
         auto vec = tree->get_order(0);
@@ -80,6 +81,9 @@ void NumberTreeTest::query_test() {
         auto vec = tree->get_order(0);
         std::cout << "索引中存在数据： " << vec->size() << "条" << std::endl;
     }
+
+    tree.reset();
+    manager.reset();
 
 }
 
