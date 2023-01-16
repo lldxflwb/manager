@@ -35,7 +35,9 @@ std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> MultiNumberTree::
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> MultiNumberTree::get_order(int order) {
-    return std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>>();
+    auto result = std::make_shared< std::vector< std::shared_ptr<PeopleInterface> > > ();
+    OrderInfo(result,order);
+    return result;
 }
 
 int MultiNumberTree::AddSon(PeopleRef people, std::queue<int> &q) {
@@ -173,4 +175,48 @@ MultiNumberTree::FindUsersByJoinTime(PeopleRef people, std::queue<int> &q) {
         return nullptr;
     }
     return son[index]->FindUsersByJoinTime(people,q);
+}
+
+void MultiNumberTree::OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result, int method) {
+    if (son != nullptr) {
+        if(method == 0 ){
+            if (users != nullptr) {
+                for ( int i = 0 ; i < users->size() ; i ++ ){
+                    auto item = (*users)[i];
+                    result->push_back(item->clone());
+                }
+            }
+            for( int i = 0 ; i < MULTI_NUMBER_TREE_MAX_NUMBER ; i ++ ) {
+                auto item = son[i];
+                if ( item!= nullptr ) {
+                    item->OrderInfo(result,method);
+                }
+            }
+
+        }
+        else{
+            for( int i = MULTI_NUMBER_TREE_MAX_NUMBER - 1 ; i >= 0 ; i -- ) {
+                auto item = son[i];
+                if ( item!= nullptr ) {
+                    item->OrderInfo(result,method);
+                }
+            }
+            if (users != nullptr) {
+                for ( int i = 0 ; i < users->size() ; i ++ ){
+                    auto item = (*users)[i];
+                    result->push_back(item->clone());
+                }
+            }
+        }
+
+
+    }
+    else {
+        if (users != nullptr) {
+            for ( int i = 0 ; i < users->size() ; i ++ ){
+                auto item = (*users)[i];
+                result->push_back(item->clone());
+            }
+        }
+    }
 }

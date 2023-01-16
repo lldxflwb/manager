@@ -16,7 +16,7 @@ class MultiNumberTree : public MapTreeInterface {
     int son_sum;
     int AddSon(PeopleRef people, std::queue<int> &q);
     int DeleteSon(PeopleRef people, std::queue<int> & q);
-
+    void OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result , int method = 0 );
     constexpr int GetMaxDeep() {
         auto max_number = MULTI_SAVE_MAX_NUMBER;
         int cnts = 0;
