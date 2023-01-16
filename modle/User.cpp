@@ -10,3 +10,10 @@ std::ostream &operator<<(std::ostream &os, const User &user) {
     os << static_cast<const PeopleInterface &>(user);
     return os;
 }
+
+std::shared_ptr<PeopleInterface> User::clone() {
+    auto c = std::make_shared<User>(std::move(*PeopleInterface::clone()));
+    return c;
+}
+
+User::User(PeopleInterface &&p) : PeopleInterface(p){}

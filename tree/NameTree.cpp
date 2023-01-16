@@ -40,12 +40,13 @@ std::shared_ptr<PeopleInterface> NameTree::get_user(PeopleRef people) {
     return FindUserByNameAndID(people->getUserName()->c_str(),people->getUserName()->length(),(*people->getId()));
 }
 
-std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_peoples(PeopleRef people) {
+std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NameTree::get_peoples(PeopleRef people) {
     return FindUserByName(people->getUserName()->c_str(),people->getUserName()->length());
 }
 
-std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_order(int order) {
-    std::shared_ptr<std::vector<PeopleInterface>> result = std::make_shared<std::vector<PeopleInterface>>();
+std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NameTree::get_order(int order) {
+    std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result = std::make_shared<std::vector<std::shared_ptr<PeopleInterface>>>();
+    result->reserve(this->son_sum);
     this->OrderInfo(result,order);
     return result;
 }
@@ -137,7 +138,7 @@ std::shared_ptr<PeopleInterface> NameTree::FindUserByNameAndID(const char *name,
         }
         for(auto & item : *peoples){
             if((*item->getId()) == id){
-                return std::make_shared<PeopleInterface>(item->clone());
+                return item->clone();
             }
         }
         return nullptr;
@@ -160,13 +161,13 @@ std::shared_ptr<PeopleInterface> NameTree::FindUserByNameAndID(const char *name,
     return tmp_root->son[value % 16]->FindUserByNameAndID(name + 1, length - 1,id);
 }
 
-std::shared_ptr<std::vector<PeopleInterface>> NameTree::FindUserByName(const char *name, int length) {
+std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NameTree::FindUserByName(const char *name, int length) {
     if (length==0){
         // find user in peoples
         if (peoples== nullptr){
             return nullptr;
         }
-        std::shared_ptr<std::vector<PeopleInterface>> result = std::make_shared<std::vector<PeopleInterface>>();
+        std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result = std::make_shared<std::vector<std::shared_ptr<PeopleInterface>>>();
         for(auto & item : *peoples){
             result->push_back(item->clone());
         }
@@ -190,11 +191,11 @@ std::shared_ptr<std::vector<PeopleInterface>> NameTree::FindUserByName(const cha
     return tmp_root->son[value % 16]->FindUserByName(name + 1, length - 1);
 }
 
-std::shared_ptr<std::vector<PeopleInterface>> NameTree::get_users(std::string name) {
+std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NameTree::get_users(std::string name) {
     return FindUserByName(name.c_str(),name.length());
 }
 
-void NameTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result, int method) {
+void NameTree::OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result, int method) {
     if (son != nullptr) {
         if(method == 0 ){
             for( int i = 0 ; i < 16 ; i ++ ) {

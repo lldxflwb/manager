@@ -28,7 +28,7 @@ std::shared_ptr<PeopleInterface> NumberTree::get_user(PeopleRef people) {
     return FindUserByID(*people->getId());
 }
 
-std::shared_ptr<std::vector<PeopleInterface>> NumberTree::get_peoples(PeopleRef people) {
+std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NumberTree::get_peoples(PeopleRef people) {
     if (people->getId() == nullptr){
         return nullptr;
     }
@@ -36,13 +36,13 @@ std::shared_ptr<std::vector<PeopleInterface>> NumberTree::get_peoples(PeopleRef 
     if (result == nullptr){
         return nullptr;
     }
-    std::shared_ptr<std::vector<PeopleInterface>> vec = std::make_shared<std::vector<PeopleInterface>>();
-    vec->push_back(*result);
+    std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> vec = std::make_shared<std::vector<std::shared_ptr<PeopleInterface>>>();
+    vec->push_back(result);
     return vec;
 }
 
-std::shared_ptr<std::vector<PeopleInterface>> NumberTree::get_order(int order) {
-    std::shared_ptr<std::vector<PeopleInterface>> result = std::make_shared<std::vector<PeopleInterface>>();
+std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NumberTree::get_order(int order) {
+    std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result = std::make_shared<std::vector<std::shared_ptr<PeopleInterface>>>();
     this->OrderInfo(result,order);
     return result;
 }
@@ -99,7 +99,7 @@ int NumberTree::DeleteSon(PeopleRef people, IDTYPE id) {
     return false;
 }
 
-void NumberTree::OrderInfo(std::shared_ptr<std::vector<PeopleInterface>> result, int method) {
+void NumberTree::OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result, int method) {
     if (son != nullptr) {
         if(method == 0 ){
             for( int i = 0 ; i < NUMBER_TREE_MAX_NUMBER ; i ++ ) {
@@ -137,7 +137,7 @@ std::shared_ptr<PeopleInterface> NumberTree::FindUserByID(IDTYPE id) {
         if ( user != nullptr ) {
             return nullptr;
         }
-        return std::make_shared<PeopleInterface>(user->clone());
+        return user->clone();
     }
     if ( son == nullptr ) {
         return nullptr;

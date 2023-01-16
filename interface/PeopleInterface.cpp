@@ -52,9 +52,8 @@ void PeopleInterface::setUserName(std::string userName) {
     *user_name = userName;
 }
 
-PeopleInterface PeopleInterface::clone() {
-    PeopleInterface c((*this->id),*(this->user_name),*(this->join_time));
-    return c;
+std::shared_ptr<PeopleInterface> PeopleInterface::clone() {
+    return std::make_shared<PeopleInterface>((*this->id),*(this->user_name),*(this->join_time));
 }
 
 std::ostream &operator<<(std::ostream &os, const PeopleInterface &anInterface) {

@@ -36,7 +36,7 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const PeopleInterface &anInterface);
 
-    PeopleInterface clone();
+    virtual std::shared_ptr<PeopleInterface> clone();
 };
 typedef PeopleInterface * PeopleRef ;
 
