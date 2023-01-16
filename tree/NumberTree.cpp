@@ -200,7 +200,7 @@ NumberTree::~NumberTree() {
                 delete this->son[i] ;
             }
         }
-        delete son;
+        delete [] son;
     }
     if (this->user != nullptr){
         this->user = nullptr;
