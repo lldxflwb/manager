@@ -160,7 +160,8 @@ MultiNumberTree::FindUsersByJoinTime(PeopleRef people, std::queue<int> &q) {
         if ( users ==nullptr ) {
             return nullptr;
         }
-        std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result ;
+        std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result = std::make_shared
+                <std::vector<std::shared_ptr<PeopleInterface> > >() ;
         for( auto & item : * users){
             result->push_back(item->clone());
         }
