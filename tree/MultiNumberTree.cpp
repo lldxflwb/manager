@@ -6,7 +6,7 @@
 #include <stack>
 
 Ecode MultiNumberTree::add_son(PeopleRef people) {
-    auto q = GetIDs(*people->getId());
+    auto q = GetIDs(*people->getJoinTime());
     if (AddSon(people,q)){
         return success;
     }
@@ -14,10 +14,13 @@ Ecode MultiNumberTree::add_son(PeopleRef people) {
 }
 
 Ecode MultiNumberTree::delete_son(PeopleRef people) {
+    if (people->getJoinTime() == nullptr){
+        return Ecode::no_join_time;
+    }
     if (people->getId() == nullptr){
         return Ecode::no_id;
     }
-    auto q = GetIDs(*people->getId());
+    auto q = GetIDs(*people->getJoinTime());
     if (this->DeleteSon(people,q)){
         return success;
     }
@@ -25,12 +28,12 @@ Ecode MultiNumberTree::delete_son(PeopleRef people) {
 }
 
 std::shared_ptr<PeopleInterface> MultiNumberTree::get_user(PeopleRef people) {
-    auto q = GetIDs((*(people->getId())));
+    auto q = GetIDs((*(people->getJoinTime())));
     return FindUserByJoinTimeAndID(people, q);
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> MultiNumberTree::get_peoples(PeopleRef people) {
-    auto q = GetIDs((*(people->getId())));
+    auto q = GetIDs((*(people->getJoinTime())));
     return FindUsersByJoinTime(people,q);
 }
 
