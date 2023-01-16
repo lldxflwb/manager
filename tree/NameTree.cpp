@@ -64,13 +64,19 @@ int NameTree::AddSon(PeopleRef people, const char *name, int length) {
     // 在这个节点放置
     if (this->son == nullptr){
         this->son = new NameTree*[16];
+        for (int i = 0; i < 16; ++i) {
+            this->son[i]= nullptr;
+        }
     }
-    if (this->son[value/16]== nullptr){
+    if (this->son[value/16] == nullptr){
         this->son[value/16] = new NameTree;
     }
-    NameTree * tmp_root = this->son[value/16];
+    NameTree * & tmp_root = this->son[value/16];
     if (tmp_root->son == nullptr){
         tmp_root->son = new NameTree * [16];
+        for (int i = 0; i < 16; ++i) {
+            tmp_root->son[i]= nullptr;
+        }
     }
     if (tmp_root->son[value%16]== nullptr){
         tmp_root->son[value%16] = new NameTree;
@@ -199,10 +205,10 @@ void NameTree::OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInter
     if (son != nullptr) {
         if(method == 0 ){
             for( int i = 0 ; i < 16 ; i ++ ) {
-                auto item = son[i];
-                if ( item!= nullptr ) {
-                    item->OrderInfo(result,method);
+                if (son[i] == nullptr){
+                    continue;
                 }
+                son[i]->OrderInfo(result,method);
             }
             if (peoples != nullptr) {
                 for ( auto & item : *peoples) {
