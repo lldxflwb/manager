@@ -11,4 +11,5 @@ add_executable(manager main.cpp
         tree/NameTree.cpp
         tree/NumberTree.cpp
         test/NameTreeTest.cpp
-        test/TestAction.cpp)
+        test/TestAction.cpp
+        test/NumberTreeTest.cpp)
