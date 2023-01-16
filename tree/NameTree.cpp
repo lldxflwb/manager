@@ -259,7 +259,7 @@ NameTree::~NameTree() {
             delete this->son[i];
             this->son[i] = nullptr;
         }
-        delete this->son;
+        delete[] this->son;
     }
     if(this->peoples != nullptr){
         delete this->peoples;
