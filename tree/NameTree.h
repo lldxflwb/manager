@@ -8,6 +8,10 @@
 #include "../interface/MapTreeInterface.h"
 class NameTree : MapTreeInterface{
     NameTree ** son;
+public:
+    virtual ~NameTree();
+
+private:
     std::vector<PeopleRef> * peoples;
     int son_sum;
     int AddSon(PeopleRef people, const char *name, int length);

@@ -131,6 +131,10 @@ int NameTree::DeleteSon(PeopleRef people, const char *name, int length) {
     // 往下继续删除
     if (tmp_root->son[value%16]->DeleteSon(people,name+1,length-1)){
         this->son_sum -- ;
+        if ( tmp_root->son[value%16]->son_sum == 0 ){
+            delete tmp_root->son[value%16];
+            tmp_root->son[value%16] = nullptr;
+        }
         return true;
     }
     return false;
@@ -247,4 +251,19 @@ NameTree::NameTree() {
     this->peoples = nullptr;
     this->son = nullptr;
     this->son_sum = 0 ;
+}
+
+NameTree::~NameTree() {
+    if (this->son!= nullptr){
+        for (int i = 0; i < 16; ++i) {
+            delete this->son[i];
+            this->son[i] = nullptr;
+        }
+        delete this->son;
+    }
+    if(this->peoples != nullptr){
+        delete this->peoples;
+        this->peoples = nullptr;
+    }
+    this->son_sum = 0;
 }

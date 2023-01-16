@@ -92,5 +92,8 @@ void NameTreeTest::query_test() {
         auto vec = tree->get_order(0);
         std::cout << "索引中存在数据： " << vec->size() << "条" << std::endl;
     }
+
+    tree.reset();
+    manager.reset();
 }
 
