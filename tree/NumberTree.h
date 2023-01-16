@@ -34,6 +34,7 @@ class NumberTree : public MapTreeInterface{
         }
         return cnts;
     }
+    std::queue<int> GetIDs(IDTYPE id);
 public:
     Ecode add_son(PeopleRef people) override;
 

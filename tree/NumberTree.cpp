@@ -6,22 +6,7 @@
 #include <stack>
 Ecode NumberTree::add_son(PeopleRef people) {
     IDTYPE id = *people->getId();
-    std::queue<int> q;
-    int deep = GetMaxDeep();
-    int number_deep = GetMaxDeep(id);
-    deep-=number_deep;
-    while (deep--){
-        q.push(0);
-    }
-    std::stack<int> st;
-    while(id){
-        st.push(id%NUMBER_TREE_MAX_NUMBER);
-        id/=NUMBER_TREE_MAX_NUMBER;
-    }
-    while(!st.empty()){
-        q.push(st.top());
-        st.pop();
-    }
+    auto q = GetIDs(id);
     if (AddSon(people,q)){
         return success;
     }
@@ -170,4 +155,24 @@ std::shared_ptr<PeopleInterface> NumberTree::FindUserByID(IDTYPE id) {
         return nullptr;
     }
     return son[index]->FindUserByID(id/NUMBER_TREE_MAX_NUMBER);
+}
+
+std::queue<int> NumberTree::GetIDs(IDTYPE id) {
+    std::queue<int> q;
+    int deep = GetMaxDeep();
+    int number_deep = GetMaxDeep(id);
+    deep-=number_deep;
+    while (deep--){
+        q.push(0);
+    }
+    std::stack<int> st;
+    while(id){
+        st.push(id%NUMBER_TREE_MAX_NUMBER);
+        id/=NUMBER_TREE_MAX_NUMBER;
+    }
+    while(!st.empty()){
+        q.push(st.top());
+        st.pop();
+    }
+    return std::move(q)
 }
