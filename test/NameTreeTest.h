@@ -12,7 +12,8 @@ class NameTreeTest {
 
 public:
     NameTreeTest() {
-        manager = TestAction::MakeManager(100000);
+        manager = TestAction::MakeManager(1000000);
+//        manager = TestAction::MakeManager(100);
         tree = std::make_shared<NameTree>();
     }
 
