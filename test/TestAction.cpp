@@ -6,10 +6,10 @@
 #include <chrono>
 #include <ctime>
 #include <iostream>
-std::shared_ptr<Manager> TestAction::MakeManager(int number) {
+std::shared_ptr<TestManager> TestAction::MakeManager(int number) {
     std::cout << "生成用户中";
     START_TIMER
-    std::shared_ptr<Manager> manager = std::make_shared<Manager>();
+    std::shared_ptr<TestManager> manager = std::make_shared<TestManager>();
     manager->user->reserve(number);
     for (int i = 0; i < number; ++i) {
         // id 自生成

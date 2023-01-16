@@ -9,7 +9,7 @@
 #include "../tree/MultiNumberTree.h"
 
 class MultiTreeTest {
-    std::shared_ptr<Manager> manager ;
+    std::shared_ptr<TestManager> manager ;
     std::shared_ptr<MultiNumberTree> tree ;
 public:
     MultiTreeTest() {

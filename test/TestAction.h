@@ -4,7 +4,7 @@
 
 #ifndef MANAGER_TESTACTION_H
 #define MANAGER_TESTACTION_H
-#include "../modle/Manager.h"
+#include "../modle/TestManager.h"
 #include <iostream>
 #include <chrono>
 #define START_TIMER auto start = std::chrono::high_resolution_clock::now();
@@ -15,7 +15,7 @@
 
 class TestAction {
 public:
-    static std::shared_ptr<Manager> MakeManager(int number = 1000);
+    static std::shared_ptr<TestManager> MakeManager(int number = 1000);
 
     static int RandomRange(int start_no , int end_no);
 

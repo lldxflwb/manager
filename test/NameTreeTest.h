@@ -7,7 +7,7 @@
 #include "TestAction.h"
 #include "../tree/NameTree.h"
 class NameTreeTest {
-    std::shared_ptr<Manager> manager ;
+    std::shared_ptr<TestManager> manager ;
     std::shared_ptr<NameTree> tree ;
 
 public:

@@ -1,5 +1,5 @@
 //
-// Created by 48449 on 2023/1/15.
+// Created by 48449 on 2023/1/16.
 //
 
 #ifndef MANAGER_MANAGER_H
@@ -10,9 +10,7 @@
 class Manager {
 public:
     std::shared_ptr<std::vector<User>> user;
-
     Manager();
 };
-
 
 #endif //MANAGER_MANAGER_H
