@@ -17,7 +17,8 @@ Ecode NumberTree::delete_son(PeopleRef people) {
     if (people->getId() == nullptr){
         return Ecode::no_id;
     }
-    if (this->DeleteSon(people,*people->getId())){
+    auto q = GetIDs(*people->getId());
+    if (this->DeleteSon(people,q)){
         return success;
     }
     return delete_error;
@@ -76,8 +77,8 @@ int NumberTree::AddSon(PeopleRef people, std::queue<int> &st) {
     return false;
 }
 
-int NumberTree::DeleteSon(PeopleRef people, IDTYPE id) {
-    if ( id == 0 ) {
+int NumberTree::DeleteSon(PeopleRef people, std::queue<int> id) {
+    if ( id.empty() ) {
         if ( user !=nullptr ) {
             if ( (*user->getId()) == (*people->getId())){
                 user = nullptr;
@@ -93,11 +94,12 @@ int NumberTree::DeleteSon(PeopleRef people, IDTYPE id) {
     if (son_sum == 0){
         return false;
     }
-    int index = id % NUMBER_TREE_MAX_NUMBER;
+    int index = id.front();
+    id.pop();
     if ( son[index]== nullptr){
         return false;
     }
-    bool flag_result = DeleteSon(people,id/NUMBER_TREE_MAX_NUMBER);
+    bool flag_result = son[index]->DeleteSon(people,id);
     if ( flag_result ){
         son_sum--;
         return true;
@@ -174,5 +176,5 @@ std::queue<int> NumberTree::GetIDs(IDTYPE id) {
         q.push(st.top());
         st.pop();
     }
-    return std::move(q)
+    return std::move(q);
 }

@@ -14,7 +14,7 @@ class NumberTree : public MapTreeInterface{
     PeopleRef user;
     int son_sum;
     int AddSon(PeopleRef people, std::queue<int> &st);
-    int DeleteSon(PeopleRef people , IDTYPE id);
+    int DeleteSon(PeopleRef people , std::queue<int> id);
     std::shared_ptr<PeopleInterface> FindUserByID(IDTYPE id );
     void OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result , int method = 0 );
     constexpr int GetMaxDeep() {
