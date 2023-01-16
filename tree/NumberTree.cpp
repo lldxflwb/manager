@@ -28,14 +28,16 @@ std::shared_ptr<PeopleInterface> NumberTree::get_user(PeopleRef people) {
     if (people->getId() == nullptr){
         return nullptr;
     }
-    return FindUserByID(*people->getId());
+    auto q = GetIDs(*people->getId());
+    return FindUserByID(q);
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NumberTree::get_peoples(PeopleRef people) {
     if (people->getId() == nullptr){
         return nullptr;
     }
-    auto result = FindUserByID(*people->getId());
+    auto q = GetIDs(*people->getId());
+    auto result = FindUserByID(q);
     if (result == nullptr){
         return nullptr;
     }
@@ -142,8 +144,8 @@ void NumberTree::OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInt
     }
 }
 
-std::shared_ptr<PeopleInterface> NumberTree::FindUserByID(IDTYPE id) {
-    if ( id == 0 ) {
+std::shared_ptr<PeopleInterface> NumberTree::FindUserByID(std::queue<int> id) {
+    if ( id.empty() ) {
         if ( user != nullptr ) {
             return nullptr;
         }
@@ -152,11 +154,12 @@ std::shared_ptr<PeopleInterface> NumberTree::FindUserByID(IDTYPE id) {
     if ( son == nullptr ) {
         return nullptr;
     }
-    int index = id % NUMBER_TREE_MAX_NUMBER;
+    int index = id.front();
+    id.pop();
     if ( son[index] == nullptr ) {
         return nullptr;
     }
-    return son[index]->FindUserByID(id/NUMBER_TREE_MAX_NUMBER);
+    return son[index]->FindUserByID(id);
 }
 
 std::queue<int> NumberTree::GetIDs(IDTYPE id) {
