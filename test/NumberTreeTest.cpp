@@ -44,5 +44,19 @@ void NumberTreeTest::query_test() {
         STOP_TIMER
         std::cout << "测试反向获取用户列表结束"<<std::endl;
     }
+    {
+        std::cout << "根据id获取用户信息测试 --------- start ---------" <<std::endl;
+        START_TIMER
+        for( auto & item : *(manager->user)){
+            PeopleInterface peopleInterface(*item.getId(),"",0);
+            auto result = tree->get_user(&peopleInterface);
+            if ( result == nullptr ){
+                std::cerr << "查找用户 " << item << " ,失败";
+            }
+            std::cout << *result<<std::endl;
+        }
+        STOP_TIMER
+        std::cout << "根据id获取用户信息测试 --------- end   ---------"<<std::endl;
+    }
 }
 

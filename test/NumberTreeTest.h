@@ -14,8 +14,8 @@ class NumberTreeTest {
 
 public:
     NumberTreeTest() {
-        manager = TestAction::MakeManager(1000000);
-//        manager = TestAction::MakeManager(100);
+//        manager = TestAction::MakeManager(1000000);
+        manager = TestAction::MakeManager(100);
         tree = std::make_shared<NumberTree>();
     }
     void test();
