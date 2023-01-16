@@ -25,11 +25,13 @@ Ecode MultiNumberTree::delete_son(PeopleRef people) {
 }
 
 std::shared_ptr<PeopleInterface> MultiNumberTree::get_user(PeopleRef people) {
-    return std::shared_ptr<PeopleInterface>();
+    auto q = GetIDs((*(people->getId())));
+    return FindUserByJoinTimeAndID(people, q);
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> MultiNumberTree::get_peoples(PeopleRef people) {
-    return std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>>();
+    auto q = GetIDs((*(people->getId())));
+    return FindUsersByJoinTime(people,q);
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> MultiNumberTree::get_order(int order) {
@@ -119,4 +121,56 @@ int MultiNumberTree::DeleteSon(PeopleRef people, std::queue<int> &q) {
         return true;
     }
     return false;
+}
+
+std::shared_ptr<PeopleInterface> MultiNumberTree::FindUserByJoinTimeAndID(PeopleRef people, std::queue<int> &q) {
+    if ( q.empty() ) {
+        if ( users ==nullptr ) {
+            return nullptr;
+        }
+        for( auto iter = (*users).begin(); iter != users->end() ; iter ++ ){
+            if ( (*((*iter)->getId())) == (*(people->getId())) ){
+                return (*iter)->clone();
+            }
+        }
+        return nullptr;
+    }
+    if (son==nullptr){
+        return nullptr;
+    }
+    if (son_sum == 0){
+        return nullptr;
+    }
+    int index = q.front();
+    q.pop();
+    if ( son[index]== nullptr){
+        return nullptr;
+    }
+    return son[index]->FindUserByJoinTimeAndID(people,q);
+}
+
+std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>>
+MultiNumberTree::FindUsersByJoinTime(PeopleRef people, std::queue<int> &q) {
+    if ( q.empty() ) {
+        if ( users ==nullptr ) {
+            return nullptr;
+        }
+        std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result ;
+        for( auto & item : * users){
+            result->push_back(item->clone());
+        }
+        return result;
+    }
+    if (son==nullptr){
+        return nullptr;
+    }
+    if (son_sum == 0){
+        return nullptr;
+    }
+    int index = q.front();
+    q.pop();
+    if ( son[index]== nullptr){
+        return nullptr;
+    }
+    return son[index]->FindUsersByJoinTime(people,q);
 }

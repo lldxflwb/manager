@@ -35,6 +35,8 @@ class MultiNumberTree : public MapTreeInterface {
         return cnts;
     }
     std::queue<int> GetIDs(IDTYPE id);
+    std::shared_ptr<PeopleInterface> FindUserByJoinTimeAndID(PeopleRef people,std::queue<int> & q );
+    std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> FindUsersByJoinTime( PeopleRef people , std::queue<int> & q);
 public:
     MultiNumberTree() {
         son = nullptr;
@@ -44,11 +46,11 @@ public:
 
     Ecode add_son(PeopleRef people) override; // ok
 
-    Ecode delete_son(PeopleRef people) override;
+    Ecode delete_son(PeopleRef people) override; // ok
 
-    std::shared_ptr<PeopleInterface> get_user(PeopleRef people) override;
+    std::shared_ptr<PeopleInterface> get_user(PeopleRef people) override; // ok
 
-    std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> get_peoples(PeopleRef people) override;
+    std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> get_peoples(PeopleRef people) override; // ok
 
     std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> get_order(int order) override;
 };
