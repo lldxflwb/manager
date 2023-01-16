@@ -5,6 +5,7 @@
 #include "NumberTreeTest.h"
 
 void NumberTreeTest::test() {
+    std::cout << "---------------- 开始测试 id索引 ----------------" << std::endl;
     insert_test();
     query_test();
 }

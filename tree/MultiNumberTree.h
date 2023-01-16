@@ -6,8 +6,9 @@
 #define MANAGER_MULTINUMBERTREE_H
 #include "../modle/User.h"
 #include "../interface/MapTreeInterface.h"
-#define MULTI_NUMBER_TREE_MAX_NUMBER 5l
-#define MULTI_SAVE_MAX_NUMBER 1000000000l
+#include <limits>
+#define MULTI_NUMBER_TREE_MAX_NUMBER 5
+#define MULTI_SAVE_MAX_NUMBER std::numeric_limits<long int>::max()
 #include <queue>
 
 class MultiNumberTree : public MapTreeInterface {

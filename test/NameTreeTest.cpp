@@ -6,6 +6,7 @@
 #include "TestAction.h"
 
 void NameTreeTest::test() {
+    std::cout << "---------------- 开始测试 名称索引 ----------------" << std::endl;
     insert_test();
     query_test();
 }
