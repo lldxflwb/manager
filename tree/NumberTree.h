@@ -6,7 +6,7 @@
 #define MANAGER_NUMBERTREE_H
 #include "../modle/User.h"
 #include "../interface/MapTreeInterface.h"
-#define NUMBER_TREE_MAX_NUMBER 10l
+#define NUMBER_TREE_MAX_NUMBER 5l
 #define SAVE_MAX_NUMBER 100000000l
 #include <queue>
 class NumberTree : public MapTreeInterface{
