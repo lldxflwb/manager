@@ -41,7 +41,7 @@ std::shared_ptr<PeopleInterface> NameTree::get_user(PeopleRef people) {
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NameTree::get_peoples(PeopleRef people) {
-    return FindUserByName(people->getUserName()->c_str(),people->getUserName()->length());
+    return get_users(*people->getUserName());
 }
 
 std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> NameTree::get_order(int order) {
@@ -129,7 +129,7 @@ int NameTree::DeleteSon(PeopleRef people, const char *name, int length) {
         return false;
     }
     // 往下继续删除
-    if (DeleteSon(people,name+1,length-1)){
+    if (tmp_root->son[value%16]->DeleteSon(people,name+1,length-1)){
         this->son_sum -- ;
         return true;
     }
