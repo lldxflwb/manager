@@ -224,3 +224,19 @@ void MultiNumberTree::OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<Peop
         }
     }
 }
+
+MultiNumberTree::~MultiNumberTree() {
+    if ( this->son != nullptr ){
+        for (int i = 0; i < MULTI_NUMBER_TREE_MAX_NUMBER; ++i) {
+            if (this->son[i] != nullptr ){
+                delete this->son[i] ;
+            }
+        }
+        delete [] son;
+    }
+    if (this->users != nullptr){
+        this->users.reset();
+        this->users = nullptr;
+    }
+    son_sum = 0;
+}

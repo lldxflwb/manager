@@ -15,6 +15,10 @@ class MultiNumberTree : public MapTreeInterface {
     MultiNumberTree ** son;
     std::shared_ptr<std::vector<PeopleRef> > users;
     int son_sum;
+public:
+    virtual ~MultiNumberTree();
+
+private:
     int AddSon(PeopleRef people, std::queue<int> &q);
     int DeleteSon(PeopleRef people, std::queue<int> & q);
     void OrderInfo(std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> result , int method = 0 );
