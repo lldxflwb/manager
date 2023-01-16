@@ -24,9 +24,9 @@ void NumberTreeTest::query_test() {
         std::cout << "测试正向获取用户列表" <<std::endl;
         START_TIMER
         auto vec = tree->get_order(0);
-        for (auto & item : *vec) {
-            std::cout << *item << std::endl;
-        }
+//        for (auto & item : *vec) {
+//            std::cout << *item << std::endl;
+//        }
         STOP_TIMER
         std::cout << "测试正向获取用户列表结束"<<std::endl;
     }
@@ -34,9 +34,9 @@ void NumberTreeTest::query_test() {
         std::cout << "测试反向获取用户列表"<<std::endl;
         START_TIMER
         auto vec = tree->get_order(1);
-        for (auto & item : *vec) {
-            std::cout << (*item) << std::endl;
-        }
+//        for (auto & item : *vec) {
+//            std::cout << (*item) << std::endl;
+//        }
         STOP_TIMER
         std::cout << "测试反向获取用户列表结束"<<std::endl;
     }
