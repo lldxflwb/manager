@@ -8,11 +8,13 @@ add_executable(manager main.cpp
         interface/PeopleInterface.cpp
         modle/User.cpp
         modle/TestManager.cpp
-        modle/Manager.cpp
+        modle/Manager.
+        modle/UserSaveList.cpp
         tree/NameTree.cpp
         tree/NumberTree.cpp
         tree/MultiNumberTree.cpp
         test/NameTreeTest.cpp
         test/TestAction.cpp
         test/NumberTreeTest.cpp
-        test/MultiTreeTest.cpp)
+        test/MultiTreeTest.cpp
+        test/ManagerTest.cpp)
