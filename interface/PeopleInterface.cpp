@@ -33,6 +33,9 @@ const std::shared_ptr<IDTYPE> &PeopleInterface::getId() const {
 }
 
 void PeopleInterface::setId(IDTYPE id) {
+    if ( this->id == nullptr ){
+        this->id = std::make_shared<IDTYPE>();
+    }
     (*PeopleInterface::id) = id;
 }
 
@@ -41,6 +44,9 @@ const std::shared_ptr<time_t> &PeopleInterface::getJoinTime() const {
 }
 
 void PeopleInterface::setJoinTime(time_t joinTime) {
+    if ( this->join_time == nullptr ){
+        this->join_time = std::make_shared<time_t>();
+    }
     *join_time = joinTime;
 }
 
@@ -49,6 +55,9 @@ const std::shared_ptr<std::string> &PeopleInterface::getUserName() const {
 }
 
 void PeopleInterface::setUserName(std::string userName) {
+    if ( this->user_name == nullptr ){
+        this->user_name = std::make_shared<std::string>();
+    }
     *user_name = userName;
 }
 
