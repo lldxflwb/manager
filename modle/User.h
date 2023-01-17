@@ -7,13 +7,14 @@
 
 #include <ostream>
 #include "../interface/PeopleInterface.h"
-
+#include <list>
 class User : public PeopleInterface{
 public:
     User(const std::string &name, time_t joinTime);
     virtual std::shared_ptr<PeopleInterface> clone() override;
     friend std::ostream &operator<<(std::ostream &os, const User &user);
     User(PeopleInterface && p);
+    std::list<User>::iterator ref;
 
     virtual ~User();
 };

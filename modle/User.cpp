@@ -16,7 +16,8 @@ std::shared_ptr<PeopleInterface> User::clone() {
     return c;
 }
 
-User::User(PeopleInterface &&p) : PeopleInterface(p){}
+User::User(PeopleInterface &&p) : PeopleInterface(p){
+}
 
 User::~User() {
     User::PeopleInterface::~PeopleInterface();
