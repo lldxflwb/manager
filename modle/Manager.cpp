@@ -5,7 +5,7 @@
 #include "Manager.h"
 
 Manager::Manager() {
-    users = std::make_shared<std::vector<User>>();
+    users = std::make_shared<std::list<User>>();
     name_tree = std::make_shared<NameTree>();
     number_tree = std::make_shared<NumberTree>();
     multi_number_tree = std::make_shared<MultiNumberTree>();
