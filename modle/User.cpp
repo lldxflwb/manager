@@ -20,7 +20,6 @@ std::shared_ptr<PeopleInterface> User::clone() {
 User::User(PeopleInterface &&p) : PeopleInterface(p){
     ref = nullptr;
 }
-
+#include <iostream>
 User::~User() {
-    User::PeopleInterface::~PeopleInterface();
 }
