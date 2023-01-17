@@ -10,12 +10,14 @@
 #include "User.h"
 #include <list>
 #include <vector>
+#include "UserSaveList.h"
 class Manager {
-    std::shared_ptr<std::list<User>> users;
+
+public:
+    std::shared_ptr<UserSaveList> users;
     std::shared_ptr<NameTree> name_tree;
     std::shared_ptr<NumberTree> number_tree;
     std::shared_ptr<MultiNumberTree> multi_number_tree;
-public:
     Manager();
     int AddUser(User & user );
     int DeleteUser( IDTYPE id );

@@ -41,5 +41,6 @@ time_t TestAction::RandomJoinTime() {
 }
 
 int TestAction::RandomRange(int start_no, int end_no) {
+
     return rand()%(end_no-start_no+1)+start_no;
 }

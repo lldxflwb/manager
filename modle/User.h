@@ -7,6 +7,7 @@
 
 #include <ostream>
 #include "../interface/PeopleInterface.h"
+#include "../modle/UserSaveList.h"
 #include <list>
 class User : public PeopleInterface{
 public:
@@ -14,7 +15,7 @@ public:
     virtual std::shared_ptr<PeopleInterface> clone() override;
     friend std::ostream &operator<<(std::ostream &os, const User &user);
     User(PeopleInterface && p);
-    std::list<User>::iterator ref;
+    Node * ref;
 
     virtual ~User();
 };

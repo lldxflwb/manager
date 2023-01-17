@@ -13,10 +13,12 @@ std::ostream &operator<<(std::ostream &os, const User &user) {
 
 std::shared_ptr<PeopleInterface> User::clone() {
     auto c = std::make_shared<User>(std::move(*PeopleInterface::clone()));
+    c->ref = ref;
     return c;
 }
 
 User::User(PeopleInterface &&p) : PeopleInterface(p){
+    ref = nullptr;
 }
 
 User::~User() {

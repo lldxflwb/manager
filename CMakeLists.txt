@@ -8,7 +8,7 @@ add_executable(manager main.cpp
         interface/PeopleInterface.cpp
         modle/User.cpp
         modle/TestManager.cpp
-        modle/Manager.
+        modle/Manager.cpp
         modle/UserSaveList.cpp
         tree/NameTree.cpp
         tree/NumberTree.cpp

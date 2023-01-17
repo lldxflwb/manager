@@ -4,6 +4,7 @@
 
 #include "MultiNumberTree.h"
 #include <stack>
+#include <iostream>
 
 Ecode MultiNumberTree::add_son(PeopleRef people) {
     auto q = GetIDs(*people->getJoinTime());
@@ -39,7 +40,7 @@ std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> MultiNumberTree::
 
 std::shared_ptr<std::vector<std::shared_ptr<PeopleInterface>>> MultiNumberTree::get_order(int order) {
     auto result = std::make_shared< std::vector< std::shared_ptr<PeopleInterface> > > ();
-    OrderInfo(result,order);
+    this->OrderInfo(result,order);
     return result;
 }
 
@@ -49,12 +50,15 @@ int MultiNumberTree::AddSon(PeopleRef people, std::queue<int> &q) {
             users = std::make_shared<std::vector<PeopleRef>>();
         }
         // 校验是否加入，使用id
-        for(auto & item : *users ){
+        for(PeopleRef item : *users ){
             if ((*(item->getId())) == (*(people->getId()))){
+                std::cerr << "用户已存在 ， 插入用户:" << *people << "，索引数据 : " << *item << std::endl;
                 return false;
             }
         }
+//        std::cout << "\ninsert user : " << *people << std::endl;
         users->push_back(people);
+        son_sum ++ ;
         return true;
     }
     if ( son == nullptr ) {
@@ -68,6 +72,7 @@ int MultiNumberTree::AddSon(PeopleRef people, std::queue<int> &q) {
     if ( son[index] == nullptr ) {
         son[index] = new MultiNumberTree();
     }
+//    std:: cout << index << ",";
     bool flag_result = son[index]->AddSon(people, q );
     if ( flag_result ){
         son_sum ++ ;
